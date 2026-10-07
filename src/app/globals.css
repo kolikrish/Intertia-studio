@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+  --PPNeueMontreal: var(--font-PPNeueMontreal);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-PPNeueMontreal: var(--font-PPNeueMontreal);
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 1024px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-PPNeueMontreal);
+  overflow-x: hidden;
+}
