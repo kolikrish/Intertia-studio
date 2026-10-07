@@ -11,7 +11,6 @@ const PPNeueMontreal = localFont({
     { path: "../../public/assets/fonts/PPNeueMontreal-Medium.woff2", weight: "500", style: "normal" },
     { path: "../../public/assets/fonts/PPNeueMontreal-SemiBold.woff2", weight: "600", style: "normal" },
     { path: "../../public/assets/fonts/PPNeueMontreal-Bold.woff2", weight: "700", style: "normal" },
-    { path: "../../public/assets/fonts/PPNeueMontreal-Book.woff2", weight: "450", style: "normal" },
   ],
   variable: "--font-PPNeueMontreal",
   display: "swap",
