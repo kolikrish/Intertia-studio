@@ -9,15 +9,28 @@ export default function Manifesto() {
   }, []);
 
   return (
-    <section className="w-full px-[2.8vw] max-sm:px-[6vw] max-md:px-[5vw] py-[6vw]">
-      <p className="text-[.9vw] max-sm:text-[4vw] max-md:text-[3.5vw] font-medium uppercase mb-[2vw]">
+    <section className="flex flex-col items-center w-full px-[2.8vw] max-sm:px-[6vw] max-md:px-[5vw] py-[6vw]">
+
+      <div className="flex flex-col items-center justify-center">
+
+      <p className="split-text-manifesto-2 text-3xl mb-5">
         Driven by curiosity, defined by craft
       </p>
 
-      <h2 className="split-text-manifesto text-[3.2vw] max-md:text-[7vw] max-sm:text-[8vw] font-medium leading-[1.15] tracking-tight uppercase w-[85%] max-sm:w-full max-md:w-full">
-        We are creative thinkers, rule breakers, collaborators, perfectionists,
-        problem-solvers, boundary pushers and visual storytellers.
-      </h2>
+      <div className="split-text-manifesto text-7xl text-center uppercase">
+
+        <h2>We are creative thinkers,</h2>
+        <h2>rule breakers,</h2>
+        <h2>collaborators,</h2>
+        <h2>perfectionists,</h2>
+        <h2>problem-solvers,</h2>
+        <h2>boundary pushers</h2>
+        <h2>and visual storytellers.</h2>
+          
+      </div>
+
+
+      </div>
 
       <div className="mt-[4vw] grid grid-cols-2 max-sm:grid-cols-1 max-md:grid-cols-1 gap-[3vw] w-[85%] max-sm:w-full max-md:w-full ml-auto">
         <p className="split-text-manifesto-2 text-[1.1vw] max-sm:text-[4.5vw] max-md:text-[3.5vw] font-medium leading-[1.5]">
@@ -46,3 +59,4 @@ export default function Manifesto() {
     </section>
   );
 }
+

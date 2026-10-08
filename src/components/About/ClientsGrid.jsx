@@ -65,3 +65,4 @@ export default function ClientsGrid() {
     </section>
   );
 }
+
