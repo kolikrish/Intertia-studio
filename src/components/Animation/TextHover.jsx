@@ -7,12 +7,44 @@ export default function TextAnimation({
   size = "text-[2vw]",
   font = "font-normal",
   blend = false,
-  className = ""
+  className = "",
+  href = "#",
+  onClick,
+  scroll,
 }) {
+  const isExternal =
+    typeof href === "string" &&
+    (/^(https?:|mailto:|tel:)/.test(href) || href.startsWith("#"));
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        onClick={onClick}
+        className={`relative  inline-block h-fit group cursor-pointer ${className}`}
+      >
+        <div className="relative flex flex-col items-end">
+          <span
+            className={`${size} ${blend ? "text-white mix-blend-difference" : "text-black"} text-left w-full ${font} block translate-y-[10px] rotate-x-90 group-hover:translate-y-0 group-hover:rotate-x-0 transition-all duration-500`}
+          >
+            {text}
+          </span>
+
+          <span
+            className={`absolute top-0  left-0 pointer-events-none ${size} ${blend ? "text-white mix-blend-difference" : "text-black"}  ${font} block group-hover:-translate-y-[10px] group-hover:-rotate-x-90 transition-all duration-500`}
+          >
+            {text}
+          </span>
+        </div>
+      </a>
+    );
+  }
+
   return (
     <Link
-      scroll={false}
-      href="#"
+      href={href}
+      scroll={scroll}
+      onClick={onClick}
       className={`relative  inline-block h-fit group cursor-pointer ${className}`}
     >
       <div className="relative flex flex-col items-end">

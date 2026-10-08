@@ -47,20 +47,21 @@ export default function NavBar() {
     <>
       <div className="w-full relative">
         <nav className="fixed z-[500] mix-blend-difference inset-x-0 top-0 left-0 w-full px-[2.8vw] max-sm:px-[6vw] max-md:px-[4vw] max-md:pt-[8vw] max-sm:pt-[8vw] pt-[2vw] flex items-center justify-between pointer-events-none">
-          <div className="flex relative z-[800] h-auto max-sm:w-[30vw] max-md:w-[25vw] text-white w-[12vw] items-center pointer-events-auto">
+          <Link href="/" className="flex relative z-[800] h-auto max-sm:w-[30vw] max-md:w-[25vw] text-white w-[12vw] items-center pointer-events-auto">
             <Logosvg />
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="flex h-full max-sm:hidden max-md:hidden items-end justify-between w-[35%] pointer-events-auto">
             <div className="flex items-end gap-[1.2vw] text-[.9vw] font-semibold tracking-tight uppercase">
-              {["Home", "About", "Capabilities", "Projects"].map((item) => (
+              {["Work", "About", "Capabilities", "Projects"].map((item) => (
                 <TextAnimation
                   key={item}
                   blend={true}
                   font="font-thin"
                   text={item}
                   size="text-[1vw] font-light"
+                  href={`/${item.toLowerCase()}`}
                 />
               ))}
             </div>
@@ -74,6 +75,7 @@ export default function NavBar() {
                   text="Contact"
                   font="font-bold"
                   size="text-[1.2vw] font-light uppercase"
+                  href="mailto:hello@weareinertia.com"
                 />
               </div>
               <div className="h-[1px] -mt-[.2vw] w-[80%] ml-[20%] bg-white" />
@@ -139,14 +141,19 @@ export default function NavBar() {
 
         {isTablet && (
           <div className="hamburger-menu w-screen flex-col h-screen bg-[#E7E7E7] flex items-center justify-center  px-[5vw] fixed z-[500] top-0 left-0">
-            {["WORK", "ABOUT", "CAPABILITIES", "INSIGHTS", "CONTACT"].map(
+            {["WORK", "ABOUT", "CAPABILITIES", "PROJECTS", "CONTACT"].map(
               (item) => (
-                <div key={item} className="w-full mb-[5vw]">
+                <Link
+                  key={item}
+                  href={item === "CONTACT" ? "mailto:hello@weareinertia.com" : `/${item.toLowerCase()}`}
+                  onClick={() => setIsOpen(false)}
+                  className="w-full mb-[5vw] block"
+                >
                   <p className="text-[10vw] font-medium max-md:text-[5vw] menu-text uppercase">
                     {item}
                   </p>
                   <div className="h-[1px] w-full bg-black" />
-                </div>
+                </Link>
               )
             )}
             <div className="text-[4vw] flex items-start gap-[2vw] flex-col absolute bottom-[10vw] left-[5vw] ">
