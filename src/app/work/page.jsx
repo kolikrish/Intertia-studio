@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Home/Footer";
@@ -10,16 +10,9 @@ import { WORK_PROJECTS } from "@/data/workProjects";
 
 export default function WorkPage() {
   const isTablet = UseTablet();
-  const [selectedCategory, setSelectedCategory] = useState("All works");
   const containerRef = useRef(null);
 
-  // Filter projects by category
-  const filteredProjects = useMemo(() => {
-    if (selectedCategory === "All works") return WORK_PROJECTS;
-    return WORK_PROJECTS.filter((p) => p.category === selectedCategory);
-  }, [selectedCategory]);
-
-  // Animate cards on category filter change
+  // Animate cards on initial load
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -39,40 +32,44 @@ export default function WorkPage() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [selectedCategory]);
+  }, []);
 
   return (
     <div className="bg-white text-black min-h-screen selection:bg-black selection:text-white">
       <NavBar />
 
-      <main ref={containerRef} className="pt-[14vw] md:pt-[9vw] px-[2.8vw] pb-[6vw] w-full">
-        {/* Top Control Bar: Category Filters & Title */}
-        <div className="flex flex-col items-center justify-center text-center mb-[6vw] md:mb-[5vw] gap-5">
-          {/* Header Title with Dynamic Project Count */}
-          <div className="flex flex-col items-center gap-2">
-            <div>
-              <h1 className="text-sm md:text-[1vw] font-semibold tracking-wider uppercase">
-                All works
-              </h1>
-
-            <span className="text-xs md:text-[.85vw] text-neutral-400 font-mono">
-              / ({filteredProjects.length})
+      <main ref={containerRef} className="pt-[22vw] sm:pt-[16vw] md:pt-[9vw] px-[4vw] sm:px-[3.5vw] md:px-[2.8vw] pb-[8vw] md:pb-[6vw] w-full">
+        {/* Top Header: Title & Project Count */}
+        <div className="flex flex-col items-center justify-center text-center mb-[8vw] sm:mb-[6vw] md:mb-[5vw]">
+          <div className="flex items-center gap-1.5 uppercase">
+            <h1 className="text-xs sm:text-sm md:text-[1vw] font-semibold tracking-wider">
+              All works
+            </h1>
+            <span className="text-[11px] sm:text-xs md:text-[.85vw] text-neutral-400 font-mono">
+              / ({WORK_PROJECTS.length})
             </span>
-            </div>
+          </div>
 
-            <div className="text-3xl">
-              <h2>/Products & Brand</h2>
-              <h2>/3D Billboard</h2>
-              <h2>/Immersive</h2>
-            </div>
+          <div className="text-2xl sm:text-3xl md:text-4xl text-center mt-3 sm:mt-4 md:mt-[1.2vw] font-light">
+            <h2>/Products & Brand</h2>
+            <h2>/3D Billboard</h2>
+            <h2>/Immersive</h2>
           </div>
         </div>
 
-        {/* ================= CARDS GRID ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 md:gap-y-16">
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
+        {/* ================= CARDS GRID (3-cols, then 2-cols alternating) ================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-x-6 gap-y-12 md:gap-y-16">
+          {WORK_PROJECTS.map((project, index) => {
+            // Pattern: 3 items (span 2 each), then 2 items (span 3 each), repeat
+            const isLarge = index % 5 === 3 || index % 5 === 4;
+            return (
+              <ProjectCard
+                key={project.id}
+                project={project}
+                isLarge={isLarge}
+              />
+            );
+          })}
         </div>
       </main>
 
@@ -84,7 +81,7 @@ export default function WorkPage() {
 // ----------------------------------------------------
 // Project Card Component
 // ----------------------------------------------------
-function ProjectCard({ project }) {
+function ProjectCard({ project, isLarge }) {
   const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef(null);
 
@@ -107,10 +104,20 @@ function ProjectCard({ project }) {
     <article
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="work-item-anim flex flex-col group cursor-pointer"
+      className={`work-item-anim flex flex-col group cursor-pointer ${
+        isLarge
+          ? "col-span-1 sm:col-span-1 md:col-span-3"
+          : "col-span-1 sm:col-span-1 md:col-span-2"
+      }`}
     >
       {/* Media Box */}
-      <div className="relative aspect-[3/3] w-full bg-neutral-100 overflow-hidden mb-4">
+      <div
+        className={`relative w-full bg-neutral-100 overflow-hidden mb-4 transition-all duration-300 ${
+          isLarge
+            ? "aspect-[1/1] md:aspect-[16/10.2]"
+            : "aspect-[1/1] md:aspect-[25/24]"
+        }`}
+      >
         {/* Base Image */}
         <img
           src={project.image}
@@ -140,7 +147,7 @@ function ProjectCard({ project }) {
       </div>
 
       {/* Card Info */}
-      <div className="flex flex-col gap-1">
+      <div className={`flex flex-col gap-1 ${isLarge ? "md:max-w-[70%]" : "w-full"}`}>
         <div className="flex items-start justify-between gap-2">
           <h2 className="text-sm md:text-[1.1vw] font-medium tracking-tight uppercase leading-snug group-hover:text-neutral-500 transition-colors duration-300">
             <span className="font-mono text-xs md:text-[.85vw] text-neutral-400 mr-2">
