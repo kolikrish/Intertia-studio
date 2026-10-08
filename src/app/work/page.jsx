@@ -6,8 +6,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Home/Footer";
 import FooterMobile from "@/components/Home/FooterMobile";
 import UseTablet from "@/components/Responsive/UseTablet";
-import ArrowSvg from "@/Utils/arrowSvg";
-import { WORK_PROJECTS, CATEGORIES } from "@/data/workProjects";
+import { WORK_PROJECTS } from "@/data/workProjects";
 
 export default function WorkPage() {
   const isTablet = UseTablet();
