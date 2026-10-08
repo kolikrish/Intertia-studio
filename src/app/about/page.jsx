@@ -6,6 +6,7 @@ import FooterMobile from "@/components/Home/FooterMobile";
 import UseTablet from "@/components/Responsive/UseTablet";
 import AboutHero from "@/components/About/AboutHero";
 import Manifesto from "@/components/About/Manifesto";
+import Teams from "@/components/About/teams";
 import ClientsGrid from "@/components/About/ClientsGrid";
 
 export default function AboutPage() {
@@ -16,6 +17,7 @@ export default function AboutPage() {
       <main>
         <AboutHero />
         <Manifesto />
+        <Teams />
         <ClientsGrid />
       </main>
       {isTablet ? <FooterMobile /> : <Footer />}
