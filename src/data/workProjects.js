@@ -248,3 +248,4 @@ export const WORK_PROJECTS = [
     "video": "/assets/video/second_video.mp4"
   },
 ];
+
