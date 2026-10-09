@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ArrowHover from "../Animation/ArrowHover";
 
 // Client Logos dataset from public/assets/marquee-logo
@@ -53,10 +54,11 @@ export default function ClientsGrid() {
             key={index}
             className="aspect-square border-r border-b border-neutral-200 flex items-center justify-center p-6 sm:p-8 lg:p-12 group hover:bg-neutral-50 transition-colors duration-200 cursor-pointer"
           >
-            <img
+            <Image
               src={logo}
               alt={`Client logo ${index + 1}`}
-              loading="lazy"
+              width={120}
+              height={60}
               className="max-w-[70%] max-h-[45%] w-auto h-auto object-contain transition-transform duration-500 group-hover:scale-105"
             />
           </div>
